@@ -9,6 +9,6 @@
         <p><?php the_content() ?></p>
         <?php
     }
-?>
+?>`
 
 <?php get_footer() ?>

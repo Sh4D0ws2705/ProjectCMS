@@ -1,13 +1,15 @@
 <?php
+require_once get_template_directory() . '/inc/class-custom-walker-nav-menu.php';
 
 add_action(hook_name: "wp_enqueue_scripts", callback: "loadCSSandJS");
 
-function loadCSSandJS(): void{
+function loadCSSandJS(): void
+{
     // -----------------------LOAD CSS-----------------------
 
     // Customized Bootstrap Stylesheet
     wp_enqueue_style(handle: 'bootstrap_css', src: get_theme_file_uri("/css/bootstrap.min.css"));
-    
+
     // Template Stylesheet
     wp_enqueue_style(handle: 'main_css', src: get_theme_file_uri("/css/style.css"));
 
@@ -37,4 +39,13 @@ function loadCSSandJS(): void{
     // Template Javascript
     wp_enqueue_script('js7', get_theme_file_uri(file: '/js/main.js'), [], '1.0', true);
 }
-?>
+// -----------------ĐĂng kí menu
+function phoneshop_register_menus()
+{
+    register_nav_menus(
+        array(
+            'menu-1' => esc_html__('Primary', 'Fruitables'),
+        )
+    );
+}
+add_action('init', 'phoneshop_register_menus');
