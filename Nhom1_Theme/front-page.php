@@ -4,7 +4,7 @@
 <div class="container-fluid py-5 mb-5 hero-header">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
-            <div class="col-md-12 col-lg-7">
+            <div class="col-md-12 col-lg-6">
                 <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
                 <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
                 <div class="position-relative mx-auto">
@@ -15,36 +15,26 @@
                         style="top: 0; right: 25%;">Submit Now</button>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-5">
-                <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active rounded">
-                            <img src="<?php echo get_theme_file_uri('img/hero-img-1.png') ?>" class="img-fluid w-100 h-100 bg-secondary rounded"
-                                alt="First slide">
-                            <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
-                        </div>
-                        <div class="carousel-item rounded">
-                            <img src="<?php echo get_theme_file_uri('img/hero-img-2.jpg') ?>" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-                            <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselId"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+            <div class="col-md-12 col-lg-6">
+                <?php get_template_part('slider'); ?>
             </div>
         </div>
     </div>
 </div>
 <!-- Hero End -->
 
+
+<!-- begin marquee -->
+<div class="container-fluid py-5 con-1 ">
+    <div class="marquee-text">
+        <h2>- Tươi khỏe - An toàn - Nhập khẩu - Bổ dưỡng</h2>
+        <h2>- Tươi khỏe - An toàn - Nhập khẩu - Bổ dưỡng</h2>
+        <h2>- Tươi khỏe - An toàn - Nhập khẩu - Bổ dưỡng</h2>
+        <h2>- Tươi khỏe - An toàn - Nhập khẩu - Bổ dưỡng</h2>
+        <h2>- Tươi khỏe - An toàn - Nhập khẩu - Bổ dưỡng</h2>
+    </div>
+</div>
+<!-- end marquee -->
 
 <!-- Featurs Section Start -->
 <div class="container-fluid featurs py-5">
@@ -99,6 +89,54 @@
 </div>
 <!-- Featurs Section End -->
 
+<!-- strat banner quảng cáo -->
+<div class="container-fluid py-2">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            <a href="#">
+                <img class="img w-100 h-120 d-block mx-auto"
+                    src="<?php echo get_theme_file_uri('img/section_hot_banner.png') ?>" alt="">
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end banner quảng cáo -->
+
+<!-- Bestsaler Product Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row g-4 align-items-center">
+            <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+                <h1 class="display-4">Sản phẩm bán chạy</h1>
+            </div>
+        </div>
+        <div class="woocommerce-notices-wrapper"></div>
+        <div class="row g-4">
+            <?php
+            $tax_query[] = array(
+                'taxonomy' => 'product_visibility',
+                'field' => 'name',
+                'terms' => 'featured',
+                'operator' => 'IN',
+            );
+            ?>
+            <?php $args = array('post_type' => 'product', 'posts_per_page' => 8, 'ignore_sticky_posts' => 1, 'tax_query' => $tax_query); ?>
+            <?php $getposts = new WP_query($args); ?>
+            <?php global $wp_query;
+            $wp_query->in_the_loop = true; ?>
+            <?php while ($getposts->have_posts()):
+                $getposts->the_post(); ?>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <?php get_template_part('content/product_item'); ?>
+                </div>
+            <?php endwhile;
+            wp_reset_postdata(); ?>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bestsaler Product End -->
 
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
@@ -110,32 +148,27 @@
                 </div>
                 <div class="col-lg-8 text-end">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
-                        <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
-                                <span class="text-dark" style="width: 130px;">All Products</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
-                                <span class="text-dark" style="width: 130px;">Vegetables</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
-                                <span class="text-dark" style="width: 130px;">Fruits</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
-                                <span class="text-dark" style="width: 130px;">Bread</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
-                                <span class="text-dark" style="width: 130px;">Meat</span>
-                            </a>
-                        </li>
+                        <!-- Lấy danh mục sản phẩm -->
+                        <?php
+                        $args = array(
+                            'taxonomy' => 'product_cat', // Đúng là 'taxonomy' thay vì 'taxconomy'
+                            'hide_empty' => false, // Đặt thành true nếu muốn ẩn danh mục trống
+                            'parent' => 0, // Lấy các danh mục cha
+                            'number' => 3, //lấy ra 3 danh mục thôi
+                            'order' => 'DESC'
+                        );
+
+                        $categories = get_categories($args);
+                        foreach ($categories as $category) { ?>
+                            <li class="nav-item">
+                                <a class="d-flex m-2 py-2 bg-light"
+                                    href="<?php echo get_term_link($category->slug, 'product_cat'); ?>">
+                                    <span class="text-dark" style="width: 130px;"><?php echo $category->name; ?></span>
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
+
                 </div>
             </div>
             <div class="tab-content">
@@ -146,7 +179,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -167,7 +201,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -188,7 +223,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -209,7 +245,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-4.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-4.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -230,7 +267,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-3.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-3.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -251,7 +289,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-1.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-1.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -272,7 +311,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -293,7 +333,8 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>"
+                                                class="img-fluid w-100 rounded-top" alt="">
                                         </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; left: 10px;">Fruits</div>
@@ -315,227 +356,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="tab-2" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Grapes</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Raspberries</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-3" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-1.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Oranges</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-6.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Apple</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-4" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Grapes</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-4.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Apricots</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-5" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-3.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Banana</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Raspberries</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="<?php echo get_theme_file_uri('img/fruite-item-1.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Oranges</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                                                eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -550,7 +371,8 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-secondary rounded border border-secondary">
-                        <img src="<?php echo get_theme_file_uri('img/featur-1.jpg') ?>" class="img-fluid rounded-top w-100" alt="">
+                        <img src="<?php echo get_theme_file_uri('img/featur-1.jpg') ?>"
+                            class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-primary text-center p-4 rounded">
                                 <h5 class="text-white">Fresh Apples</h5>
@@ -563,7 +385,8 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-dark rounded border border-dark">
-                        <img src="<?php echo get_theme_file_uri('img/featur-2.jpg') ?>" class="img-fluid rounded-top w-100" alt="">
+                        <img src="<?php echo get_theme_file_uri('img/featur-2.jpg') ?>"
+                            class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-light text-center p-4 rounded">
                                 <h5 class="text-primary">Tasty Fruits</h5>
@@ -576,7 +399,8 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-primary rounded border border-primary">
-                        <img src="<?php echo get_theme_file_uri('img/featur-3.jpg') ?>" class="img-fluid rounded-top w-100" alt="">
+                        <img src="<?php echo get_theme_file_uri('img/featur-3.jpg') ?>"
+                            class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-secondary text-center p-4 rounded">
                                 <h5 class="text-white">Exotic Vegitable</h5>
@@ -599,7 +423,8 @@
         <div class="owl-carousel vegetable-carousel justify-content-center">
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-6.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-6.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -615,7 +440,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-1.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-1.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -631,7 +457,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-3.png') ?>" class="img-fluid w-100 rounded-top bg-light" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-3.png') ?>"
+                        class="img-fluid w-100 rounded-top bg-light" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -647,7 +474,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-4.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-4.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -663,7 +491,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-5.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -679,7 +508,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-6.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-6.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -695,7 +525,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-5.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-5.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -711,7 +542,8 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-6.jpg') ?>" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/vegetable-item-6.jpg') ?>"
+                        class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
                     Vegetable</div>
@@ -746,7 +578,8 @@
             </div>
             <div class="col-lg-6">
                 <div class="position-relative">
-                    <img src="<?php echo get_theme_file_uri('img/baner-1.png') ?>" class="img-fluid w-100 rounded" alt="">
+                    <img src="<?php echo get_theme_file_uri('img/baner-1.png') ?>" class="img-fluid w-100 rounded"
+                        alt="">
                     <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute"
                         style="width: 140px; height: 140px; top: 0; left: 0;">
                         <h1 style="font-size: 100px;">1</h1>
@@ -762,224 +595,6 @@
 </div>
 <!-- Banner Section End -->
 
-
-<!-- Bestsaler Product Start -->
-<div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-            <h1 class="display-4">Bestseller Products</h1>
-            <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which
-                looks reasonable.</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-6 col-xl-4">
-                <div class="p-4 rounded bg-light">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <img src="<?php echo get_theme_file_uri('img/best-product-1.jpg') ?>" class="img-fluid rounded-circle w-100" alt="">
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="h5">Organic Tomato</a>
-                            <div class="d-flex my-3">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xl-4">
-                <div class="p-4 rounded bg-light">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <img src="<?php echo get_theme_file_uri('img/best-product-2.jpg') ?>" class="img-fluid rounded-circle w-100" alt="">
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="h5">Organic Tomato</a>
-                            <div class="d-flex my-3">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xl-4">
-                <div class="p-4 rounded bg-light">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <img src="<?php echo get_theme_file_uri('img/best-product-3.jpg') ?>" class="img-fluid rounded-circle w-100" alt="">
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="h5">Organic Tomato</a>
-                            <div class="d-flex my-3">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xl-4">
-                <div class="p-4 rounded bg-light">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <img src="<?php echo get_theme_file_uri('img/best-product-4.jpg') ?>" class="img-fluid rounded-circle w-100" alt="">
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="h5">Organic Tomato</a>
-                            <div class="d-flex my-3">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xl-4">
-                <div class="p-4 rounded bg-light">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <img src="<?php echo get_theme_file_uri('img/best-product-5.jpg') ?>" class="img-fluid rounded-circle w-100" alt="">
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="h5">Organic Tomato</a>
-                            <div class="d-flex my-3">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xl-4">
-                <div class="p-4 rounded bg-light">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <img src="<?php echo get_theme_file_uri('img/best-product-6.jpg') ?>" class="img-fluid rounded-circle w-100" alt="">
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="h5">Organic Tomato</a>
-                            <div class="d-flex my-3">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="text-center">
-                    <img src="<?php echo get_theme_file_uri('img/fruite-item-1.jpg') ?>" class="img-fluid rounded" alt="">
-                    <div class="py-4">
-                        <a href="#" class="h5">Organic Tomato</a>
-                        <div class="d-flex my-3 justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h4 class="mb-3">3.12 $</h4>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="text-center">
-                    <img src="<?php echo get_theme_file_uri('img/fruite-item-2.jpg') ?>" class="img-fluid rounded" alt="">
-                    <div class="py-4">
-                        <a href="#" class="h5">Organic Tomato</a>
-                        <div class="d-flex my-3 justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h4 class="mb-3">3.12 $</h4>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="text-center">
-                    <img src="<?php echo get_theme_file_uri('img/fruite-item-3.jpg') ?>" class="img-fluid rounded" alt="">
-                    <div class="py-4">
-                        <a href="#" class="h5">Organic Tomato</a>
-                        <div class="d-flex my-3 justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h4 class="mb-3">3.12 $</h4>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="text-center">
-                    <img src="<?php echo get_theme_file_uri('img/fruite-item-4.jpg') ?>" class="img-fluid rounded" alt="">
-                    <div class="py-2">
-                        <a href="#" class="h5">Organic Tomato</a>
-                        <div class="d-flex my-3 justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h4 class="mb-3">3.12 $</h4>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Bestsaler Product End -->
 
 
 <!-- Fact Start -->
@@ -1041,8 +656,8 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="<?php echo get_theme_file_uri('img/testimonial-1.jpg') ?>" class="img-fluid rounded"
-                                style="width: 100px; height: 100px;" alt="">
+                            <img src="<?php echo get_theme_file_uri('img/testimonial-1.jpg') ?>"
+                                class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -1069,8 +684,8 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="<?php echo get_theme_file_uri('img/testimonial-1.jpg') ?>" class="img-fluid rounded"
-                                style="width: 100px; height: 100px;" alt="">
+                            <img src="<?php echo get_theme_file_uri('img/testimonial-1.jpg') ?>"
+                                class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -1097,8 +712,8 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="<?php echo get_theme_file_uri('img/testimonial-1.jpg') ?>" class="img-fluid rounded"
-                                style="width: 100px; height: 100px;" alt="">
+                            <img src="<?php echo get_theme_file_uri('img/testimonial-1.jpg') ?>"
+                                class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
