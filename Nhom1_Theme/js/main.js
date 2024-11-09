@@ -160,22 +160,18 @@
         },
         success: function (response) {
           if (response.success) {
-            // Chèn thông báo vào div có class woocommerce-notices-wrapper
+            // Đưa thông báo WooCommerce vào modal
             $(".woocommerce-notices-wrapper").html(response.data.notice_html);
 
-            // Thêm hiệu ứng scrollTop
-            $("html, body").animate(
-              {
-                scrollTop: $(".woocommerce-notices-wrapper").offset().top - 100,
-              },
-              200
+            // Hiển thị modal Bootstrap
+            var addToCartModal = new bootstrap.Modal(
+              document.getElementById("addToCartModal")
             );
-
-            // Gọi thêm trigger để cập nhật cart, nếu cần
-            $(document.body).trigger("added_to_cart", [
-              response.fragments,
-              response.cart_hash,
-            ]);
+            addToCartModal.show();
+            // Tự động đóng modal sau 3 giây (3000 milliseconds)
+            setTimeout(function () {
+              addToCartModal.hide();
+            }, 1500);
           } else {
             $(".woocommerce-notices-wrapper").html(
               '<div class="woocommerce-error">' +
